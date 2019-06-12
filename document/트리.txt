@@ -1,0 +1,155 @@
+#include<stdlib.h>
+#include<memory.h>
+typedef struct TreeNode{
+	int data;
+	TreeNode *llink,*rlink;
+}TreeNode;
+
+void preorder(TreeNode *tree)//전위순회 함수
+{
+	if(tree !=NULL)
+	{
+		printf("[%d]",tree->data);
+		preorder(tree->llink);
+		preorder(tree->rlink);
+	}
+
+
+}
+void inorder(TreeNode *tree)//중의순회 함수
+{
+	if(tree !=NULL)
+	{
+		inorder(tree->llink);
+		printf("[%d]",tree->data);
+		inorder(tree->rlink);
+	}
+}
+void postorder(TreeNode *tree) //후휘순회 함수
+{
+	if(tree !=NULL)
+	{
+		postorder(tree->llink);
+		postorder(tree->rlink);
+		printf("[%d]",tree->data);
+	}
+}
+
+int get_node(TreeNode *tree) //노드개수
+{
+	int count=0;
+	if(tree!=NULL)
+		count=1+get_node(tree->llink)+get_node(tree->rlink);
+	return count;
+}
+
+int max(int x, int y) //높이 비교
+{
+	if(x>y)
+		return x;
+	else return y;
+}
+
+int get_height(TreeNode *tree) //트리 높이
+{
+	int height =0;
+	if(tree !=NULL)
+		height= 1+ max(get_height(tree->llink),get_height(tree->rlink));
+	return height;
+}
+
+TreeNode * insert_node(TreeNode *tree, int item) //삽입함수
+{
+	TreeNode *p,*node;
+	node=(TreeNode *)malloc(sizeof(TreeNode));
+	node->data=item; node->llink=node->rlink=NULL;
+	p=tree;
+
+	if(p==NULL)
+		return node;
+	if(item<p->data) //왼쪽 노드로
+		p->llink=insert_node(p->llink,item);
+	else //오른쪽 노드로
+		p->rlink=insert_node(p->rlink,item);
+	return tree;
+	
+}
+
+TreeNode *delete_node(TreeNode *root,int data) //삭제함수 (오류 ->삭제부분에 NULL값넣어야함
+{
+	TreeNode *p=root,*temp;
+	int item;
+	if(p==NULL) return root;
+	if(p->data>data) //왼쪽링크로
+		p->llink=delete_node(p->llink,data);
+	else if(p->data<data) //오른쪽링크로
+		p->rlink=delete_node(p->rlink,data);
+	else //값이 같을때
+	{
+		if(p->llink==NULL) 
+		{ temp = p->rlink; free(p);  return temp;}
+		else if(p->rlink==NULL)
+		{temp = p->llink; free(p);  return temp; } //->노이해
+
+		temp=p->rlink; //두개다달려있을때
+		while(temp->llink!=NULL)
+			temp=temp->llink;
+		p->data=temp->data;
+		 p->rlink = delete_node(p->rlink, temp->data); 
+
+	}
+	return root;
+}
+
+void search(TreeNode *root,int data) //검색함수
+{
+		TreeNode *p;
+	if(p->data>data) //왼쪽
+		delete_node(p->llink,data);
+	else if(p->data<data)//오른쪽
+		delete_node(p->rlink,data);
+	else//검색값 찾으면
+		printf("\n[%d]는 [%p]에 있다 \n",data,&p->data);
+}
+void main()
+{
+	TreeNode *root=NULL, *temp;
+	int menu, data;
+	while(1)
+	{
+		printf("메뉴 선택-> 1)삽입 2)삭제 3)검색 4)순회 5)구조..7)종료 : ");
+		scanf("%d",&menu);
+		if(menu==7)
+			break;
+		switch(menu)
+		{
+		case 1: //삽입
+			printf("\n 이진검색트리에 삽입할 정수 입력 :");
+			scanf("%d",&data);
+			root= insert_node(root,data);
+			break;
+		case 2: //삭제
+			printf("\n 이진검색트리에 삭제할 정수 입력 :");
+			scanf("%d",&data);
+			root= delete_node(root,data);
+			break;
+		case 3: //검색 후 주소/값출력
+			printf("\n 이진검색트리에 검색할 정수 입력 :");
+			scanf("%d",&data);
+			search(root,data);
+			break;
+		case 4: //순회결과 출력
+			printf("\n전위순회 결과 : "); preorder(root);
+			printf("\n중위순회 결과 : "); inorder(root);
+			printf("\n후위순회 결과 : "); postorder(root);
+			break;
+		case 5: //구조 출력
+			printf("\n트리의 노드개수 = %d \n",get_node(root));
+			printf("\n트리의 높이 = %d \n",get_height(root));
+			break;
+		default:
+			break;
+		}
+	}
+}
+

@@ -1,0 +1,104 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct queuetype{
+	struct queuetype *link;
+	int data; 
+}queuetype;
+
+
+typedef struct linked{
+	queuetype *front, *rear;
+}linked;
+
+void init(struct linked *p)
+{
+	p->front=p->rear=NULL;
+}
+
+int is_empty(struct linked *p)
+{
+	return(p->front==NULL);
+}
+void enqueue(linked *p, int item) //큐 삽입함수
+{
+	queuetype *temp;
+	temp=(queuetype *)malloc(sizeof(queuetype));
+	temp->data=item;
+	temp->link=NULL;
+	if(is_empty(p))
+	{p->front=temp;  p->rear=temp;}
+	else
+	{
+		p->rear->link=temp;
+		p->rear=temp;
+	}
+}
+
+
+
+
+int dequeue(linked *p) //큐 삭제함수
+{
+	int item;
+	queuetype *temp=(queuetype *)malloc(sizeof(queuetype));
+	if(is_empty(p))
+		return -999;
+	else 
+	{
+		item=p->front->data;
+		if(p->front==p->rear) //노드가 하나일때
+			p->front=p->rear=NULL;
+		else
+			p->front=p->front->link;
+		return item;
+	}
+
+}
+
+
+int peek(linked *p) //큐 peek함수
+{
+	if(!is_empty(p))
+		return p->rear->data; //애는 실제로 값변경하는게 아님(다음값확인만함)
+	else
+	 printf("큐 빈상태, 조회 불가 \n\n");
+	return -999;
+}
+
+
+void main()
+{
+	int menu,num;
+	
+	linked p;
+	init(&p);
+	while(1)
+	{
+		printf("\n메뉴 선택 1)큐삽입 2)큐삭제 3)큐모두출력 4)종료 ");
+		scanf("%d",&menu);
+		if(menu==4) break;
+		switch(menu)
+		{
+		case 1: //큐삽입
+			printf("\n삽입 할 값: "); 
+			scanf("%d",&num);
+			enqueue(&p,num);
+			break;
+		case 2: //큐삭제
+			num=dequeue(&p);
+			if(num==-999)
+				printf("\n큐 삭제 불가 \n"); 
+			else
+				printf("\n큐 출력 값: %d",num);
+			break;
+		case 3: //큐모두출력
+			while(!is_empty(&p))
+			{printf("큐에서 출력 :"); printf("%d \n",dequeue(&p) );}
+			break;		
+		default : printf("\n메뉴 선택 오류");
+			break;
+		}
+	}
+
+}

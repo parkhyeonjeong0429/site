@@ -2,10 +2,13 @@
 <html>
 <head>
   <title>Stydy Daily</title>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <style>
 * {
   box-sizing: border-box;
-  font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: "Open Sans", sans-serif
 }
 
 body {
@@ -46,7 +49,7 @@ body {
 
 /* Change color on hover */
 .topnav a:hover {
-  background-color: #FF6A89;
+  background-color: #D5D5D5;
   color: black;
 }
 
@@ -78,6 +81,8 @@ body {
   background-color: white;
   padding: 20px;
   margin-top: 20px;
+  border-radius:8px;
+  box-shadow: 1px 1px 6px grey;
 }
 
 /* Clear floats after the columns */
@@ -164,7 +169,7 @@ li a.active {
 }
 
 li a:hover:not(.active) {
-  background-color: #FFAAAF;
+  background-color: #D5D5D5;
   color: white;
 }
 
@@ -175,29 +180,30 @@ li a:hover:not(.active) {
 <div class="header">
   <h1 id="top" >STUDY DAILY</h1>
   <p style="color: white; text-shadow: 0px 0px 4px #FF5050; font-weight: bold;">현정이만의 스터디 공간</p>
+
 </div>
 
 <div class="topnav">
-  <a href="https://www.w3schools.com/default.asp">W3schools</a>
-  <a href="http://home.chungwoon.ac.kr/home/index.do">Chungwoon</a>
-  <a href="https://github.com/">Github</a>
-  <a href="https://www.google.com/" style="float:right">Google</a>
+  <a href="https://www.w3schools.com/default.asp"><i class='fas fa-laptop'></i>  W3schools</a>
+  <a href="http://home.chungwoon.ac.kr/home/index.do"><i class='fas fa-graduation-cap'></i>  Chungwoon</a>
+  <a href="https://github.com/"><i class='fab fa-github'></i>  Github</a>
+  <a href="https://www.google.com/" style="float:right"><i class='fab fa-google'></i>  Google</a>
 </div>
 
 <div >
-<ul style="margin-top:20px; margin-right:20px; padding-bottom:100%;">
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+<ul style="margin-top:20px; margin-right:20px; padding-bottom:294%;">
+  <li><a class="active" href="index.html"><i class='fas fa-clock'></i>  REVIEW</a></li>
+  <li><a href="index2.html"><i class='fas fa-file-alt'></i>  DOCUMENT</a></li>
+  <li><a href="index3.html"><i class='far fa-folder-open'></i>  TASK</a></li>
+  <li><a href="index4.html"><i class='fas fa-lightbulb'></i>  CODE</a></li>
 </ul>
 </div>
 
 <div  class="row">
   <div  class="leftcolumn"> 
     
-    <div class="card">
-      <h2>C++ 복습</h2>
+    <div class="card" >
+      <h2><i class='fas fa-check'></i>  C++ 복습</h2>
       <h5>객체지향언어, May 20, 2019</h5>
 
       <div class="responsive">
@@ -217,32 +223,133 @@ li a:hover:not(.active) {
         </div>
       </div>
 
-      <p style="font-weight:bold;">정리...)</p>
+      <p style="font-weight:bold;">Daily -></p>
       <p>오늘은 함수의 오버라이딩과 업케스팅 그리고 멤버함수 오버라이딩에 대해서 공부했다. 점점 가면 갈수록 내용이 어려워지지만 그래도 그만큼 시간을 더 투자하려고 하고 있다.</p>
     </div>
     
     <div class="card">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg" style="height:200px;">Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      <h2><i class='fas fa-check'></i>  리눅스 복습</h2>
+      <h5>리눅스, May 23, 2019</h5>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/리눅스1.jpg">
+          <img src="image/리눅스1.jpg" alt="리눅스">
+          </a>
+          <div class="desc"><span style="font-weight:bold;">*하드디스크 복구</span> : Raid1과 Raid5는 결함이 허용되어 복구 할 수 있고 Raid0과 Linear Raid는 결함이 허용 되지 않기 때문에 복구가 어렵다.<br><br></div>
+        </div>
+      </div>
+       <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/리눅스2.jpg">
+          <img src="image/리눅스2.jpg" alt="리눅스" style=" padding-bottom:12px;" >
+          </a>
+          <div class="desc"><span style="font-weight:bold;">*쿼터 </span>: 사용자는 하드디스크에 용량을 추가할 수 있는데 그렇게 되면 하드디스크에 용량이 너무 오버되기 때문에 사용자나 사용자 그룹에 대한 파일의 용량과 개수를 제한하는 과정이다.</div>
+        </div>
+      </div>
+
+      <p style="font-weight:bold;" >Daily -></p>
+      <p>하드디스크에 설치된 Raid장치들이 돌아가는 구조와 결함허용에 유무에 대해 정확히 이해하고 hard와 soft의 차이와 저장 방식을 정확히 이해하고 넘어가야 이 부분에서 정확한 공부를 했다고 할 수 있는 것 같다.</p>
     </div>
+
+   <div class="card">
+      <h2><i class='fas fa-check'></i>  자료구조 복습</h2>
+      <h5>HTML, May 29, 2019</h5>
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/자구1.jpg">
+          <img src="image/자구1.jpg" alt="자료구조" width="100" height="50">
+          </a>
+          <div class="desc"><span style="font-weight:bold;">*정렬</span> : 정렬 방식에는 선택정렬,삽입정렬, 쉘정렬, 버블정렬, 합병정렬, 힙정렬등이 있는데 어떤 코딩 방식이냐에 따라 어떤 정렬을 사용해야 더 빠른 성능을 가질지에 관한 여부가 달라진다. 그러므로 알맞는 정렬방식을 선택해야 한다.<br></div>
+        </div>
+      </div>
+       <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/자구2.jpg">
+          <img src="image/자구2.jpg" alt="자료구조">
+          </a>
+          <div class="desc"> <span style="font-weight:bold;">*쉘정렬</span> :쉘정렬은 삽입정렬과 비슷한 정렬방식으로 약간 변형 시킨 방식이다. 쉘정렬은 간격을 나눠서 하는 방식으로 멀리 떨어진 값끼리도 비교가 가능하다.<br> <span style="font-weight:bold;">*버블정렬</span> : 버블정렬은 가장 사용되지 않는 방식으로 모든 값을 하나씩 다 비교해보기 때문에 성능이 떨어진다.</div>
+        </div>
+      </div>
+
+      <p style="font-weight:bold;">Daily -></p>
+      <p>직접 그림을 그려가면서 정렬 방식의 이해에 도움을 주었고 어떠한 프로그램이 들어올 때 어떤 정렬 방식이 가장 좋은 성능을 가지고 있을지에 대한 생각도 하면서 정렬을 이해하려고 했다. 이렇게 여러 사고를 하면서 이해함으로써 더욱 더 향상된 이해를 할 수 있었다.</p>
+    </div>
+
+    <div class="card">
+      <h2><i class='fas fa-check'></i>  HTML 복습</h2>
+      <h5>HTML, June 6, 2019</h5>
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/html.jpg">
+          <img src="image/html.jpg" alt="C++" width="100" height="50">
+          </a>
+          <div class="desc"><span style="font-weight:bold;">*Javascript</span> : 자바스크립트는 웹페이지의 동작을 관리하여 프로그래밍하는 것이다.<span style="border:1px solid yellow; background-color:yellow;">document.getElmentById(" ").innerhtml</span>과 같은 용어를 이용하여 동작을 관리한다.<br></div>
+        </div>
+      </div>
+       <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/w3schools.JPG">
+          <img src="image/w3schools.JPG" alt="w3" style=" padding-bottom:215px; width:100%; ">
+          </a>
+          <div class="desc">w3school.com에 있는 javascript자습서를 통해서 더욱더 높은 이해를 이끌었다.</div>
+        </div>
+      </div>
+
+      <p style="font-weight:bold;">Daily -></p>
+      <p>Javascript를 공부하면서 조금 더 HTML을 동적으로 사용할 수 있는 것 같고 조금 더 머리를 쓰면서 공부를 해야할 것 같다.</p>
+    </div>
+
+    <div class="card">
+      <h2><i class='fas fa-check'></i>  리눅스 복습</h2>
+      <h5>리눅스, June 7, 2019</h5>
+
+      <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/리눅스3.jpg">
+          <img src="image/리눅스3.jpg" alt="리눅스" width="100" height="50">
+          </a>
+          <div class="desc"><span style="font-weight:bold;">*센드메일 서버</span> : 다른 서버에서 서로 메일을 주고 받을 수 있는 환경을 구축하고 client와 winclinet가 메일을 주고 받고 하는 환경을 만든다.<br><br></div>
+        </div>
+      </div>
+       <div class="responsive">
+        <div class="gallery">
+          <a target="_blank" href="image/리눅스4.jpg">
+          <img src="image/리눅스4.jpg" alt="리눅스" width="100" height="50" >
+          </a>
+          <div class="desc"><span style="font-weight:bold;">*도메인 설정 </span>: 네임서버 패키지를 설치하고 네임서버를 설정하여 네임서버 파일에 저장한다. 그리고 client에서도 메일 서버와 동일한 도메인서버로 설정한다.
+            <br><br>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-weight:bold;">Daily -></p>
+      <p>센드 메일을 설치하고 서로 메일이 있다고 가정하여 구축한 후 도메인과 메인 서버의 설정을 통해 메일이 어떻게 수신 발신 되는지에 대한 공부를 했다.</p>
+    </div>
+    
   </div>
  
 
 
   <div class="rightcolumn">
     <div class="card">
-      <h2 style="text-align:center; color:#FF607F; font-weight: bold;">박현정이라는 사람은?</h2>
-      <div style="overflow :auto; padding-left:70px;"><img src="image/hy.jpg" alt="hyeonjeong picture" style="width:150px; height:150px;" > </div>
-      <div class="fakeimg" style="border-radius:15px; text-align:center;">
-      <p>저는 청운대학교 컴퓨터공학과 20180360 박현정입니다. 저는 언제부턴가 코딩의 재미를 느껴 개발자라는 꿈을 갖게 되었습니다. 이 study daily를 통해 공부 기록을 남기며 정리해놓은 자료들을 잘 활용해서 공부 할 것입니다.</p>
-      <p style="color:red;"> 나의 목표 : 학점 4.5 받기!!!!</p>
+      <h2 style="text-align:center; color:#FF607F; font-weight: bold;">Profile</h2>
+      <div style="overflow :auto; padding-left:70px;"><img src="image/profile.png" alt="hyeonjeong picture" style="width:150px; height:150px;" > </div>
+      <div class="fakeimg" style="border-radius:15px; text-align:left;">
+      <p><i class='fas fa-caret-right'></i>  박현정<br>
+      <i class='fas fa-caret-right'></i>   April 29, 1999<br>
+      <i class='fas fa-caret-right'></i>   Chungwoon University  <br>
+       <i class='fas fa-caret-right'></i>   Computer Engineeing<br>
+      <i class='fas fa-caret-right'></i>   20180360
+    </p>
+
+      
       </div>
     </div>
+
+
     <div class="card">
-      <h3 style="color:#FF607F; font-weight: bold;">TIMETABLE</h3>
+      <h3 style="color:#FF607F; font-weight: bold;"><i class='fas fa-heart'></i>  TIMETABLE</h3>
       <div ><link  rel="stylesheet" type="text/css" href="html/time.css">
       <table >
       <caption style="color:#747474;">2학년 1학기 박현정 시간표</caption>
@@ -303,11 +410,14 @@ li a:hover:not(.active) {
      </div>
     </div>
     <div class="card">
-      <h3>Follow Me</h3>
-      <p>Some text..</p>
+       <h3 style="color:#FF607F; font-weight: bold;"><i class='fas fa-heart'></i>  PLAN</h3>
+      <p>
+      <i class='far fa-hand-rock'></i>  코딩의 왕 되기<br>
+      <i class='far fa-hand-point-up'></i>  6키로 감량<br>
+      <i class='far fa-hand-peace'></i>  토익 목표점수 도달<br></p>
     </div>
     <div class="card">
-      <h3 style="color:#FF607F; font-weight: bold;">HTML TEST</h3>
+      <h3 style="color:#FF607F; font-weight: bold;"><i class='fas fa-heart'></i>  HTML TEST</h3>
       <form action="html/answer.html">
     <pre style="font-size:12px;">Q. 지정된 요소의 모든 하위 요소를 선택해야 할 때 <br>다음 물음표에 들어갈 말은?<br>
     div (  ? ) p {

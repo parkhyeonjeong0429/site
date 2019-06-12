@@ -1,0 +1,101 @@
+#include <stdio.h>
+typedef struct {
+	int degree; float coef[100];
+}poly;
+
+void add(poly *a, poly *b, poly *c)//다항식 덧셈함수
+{
+	int Apos = 0, Bpos = 0, Cpos = 0;	// 배열 인덱스 변수
+	int degree_a = a->degree;
+	int degree_b = b->degree;
+
+	if (a->degree > b->degree) c->degree = a->degree;
+	else                       c->degree = b->degree;
+
+	while (Apos <= a->degree && Bpos <= b->degree) 
+	{
+		if (degree_a > degree_b) {  // A항 > B항
+			c->coef[Cpos++] = a->coef[Apos++];
+			degree_a--;
+		}
+		else if (degree_a == degree_b) {  // A항 == B항
+			c->coef[Cpos++] = a->coef[Apos++] + b->coef[Bpos++];
+			degree_a--; degree_b--;
+		}
+		else {			// B항 > A항
+			c->coef[Cpos++] = b->coef[Bpos++];
+			degree_b--;
+		}
+	}
+}
+void sub(poly *a, poly *b, poly *d)//다항식 뺄셈함수
+{
+	int Apos = 0, Bpos = 0, Cpos = 0;	// 배열 인덱스 변수
+	int degree_a = a->degree;
+	int degree_b = b->degree;
+
+	if (a->degree > b->degree) d->degree = a->degree;
+	else                       d->degree = b->degree;
+
+	while (Apos <= a->degree && Bpos <= b->degree) 
+	{
+		if (degree_a > degree_b) {  // A항 > B항
+			d->coef[Cpos++] = a->coef[Apos++];
+			degree_a--;
+		}
+		else if (degree_a == degree_b) {  // A항 == B항
+			d->coef[Cpos++] = a->coef[Apos++] - b->coef[Bpos++];
+			degree_a--; degree_b--;
+		}
+		else {			// B항 > A항
+			d->coef[Cpos++] = -b->coef[Bpos++];
+			degree_b--;
+		}
+	}
+}
+void main()
+{
+	poly A, B, C, D; 
+	//다항식 입력
+	printf("\n 다항식 A의 차수 : "); 
+	scanf("%d", &A.degree);
+	printf("\n 다항식 A의 계수(%d개항) : ", A.degree+1); 
+	for (int i=0; i<=A.degree; i++)
+		scanf("%f", &A.coef[i]);
+	printf("\n 다항식 B의 차수 : "); 
+	scanf("%d", &B.degree);
+	printf("\n 다항식 B의 계수(%d개항) : ", B.degree+1); 
+	for (int i=0; i<=B.degree; i++)
+		scanf("%f", &B.coef[i]);
+	//다항식 출력
+	int n = A.degree; 
+	printf("\n 다항식 A = ");
+	for (int i=0; i<=A.degree; i++)
+		if (A.coef[i] != 0)
+			printf("%.1fX^%d  ", A.coef[i], n--);
+		else n--; 
+	n = B.degree;
+	printf("\n 다항식 B = ");
+	for (int i=0; i<=B.degree; i++)
+		if (B.coef[i] != 0)
+			printf("%.1fX^%d  ", B.coef[i], n--);
+		else n--; 
+	add(&A, &B, &C);
+	n = C.degree;
+	printf("\n 다항식 C = ");
+	for (int i=0; i<=C.degree; i++)
+		if (C.coef[i] != 0)
+			printf("%.1fX^%d  ", C.coef[i], n--);
+		else n--; 
+
+	sub(&A, &B, &D);
+	n = D.degree;
+	printf("\n 다항식 D = ");
+	for (int i=0; i<=D.degree; i++)
+		if (D.coef[i] != 0)
+			printf("%.1fX^%d  ", D.coef[i], n--);
+		else n--; 
+
+	puts("\n\n");
+
+}

@@ -1,0 +1,182 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct DNode{
+	int data;
+	DNode *llink;
+	DNode *rlink;
+}DNode;
+
+DNode * insert(DNode *list, int data)
+{
+	DNode *p=list,*node;
+	node=(DNode *)malloc(sizeof(DNode));
+	node->data=data; node->llink=node->rlink=NULL;
+	if(p==NULL) //1.처음 삽입될 때
+	{list=node; return list;}
+
+	if(node->data<=p->data && p->llink==NULL)//2. 처음노드일때
+	{
+		node->rlink=p;
+		p->llink=node;
+		list=node;
+		return list;
+	}
+	while(p->rlink !=NULL && p->data<node->data)
+		p=p->rlink;
+
+	if(p->data<node->data && p->rlink==NULL) //3.맨끝 삽입
+	{
+		node->llink=p; p->rlink=node; 
+	}
+	else  //4. 중간 삽입
+	{
+		p=p->llink;
+		node->rlink=p->rlink;
+		node->llink=p;
+		p->rlink=node;
+		p->rlink->llink=node;
+	}
+
+	return list;
+
+}
+
+DNode * del(DNode *list, int data)
+{
+	DNode *p;
+	p=list;
+	if(list==NULL) {printf("\n삭제 불가\n"); return list;}
+	while(p->rlink!=NULL && p->data!=data)
+		p=p->rlink;
+	if(p->llink==p->rlink &&p->data==data) //1. 유일한 값삭제
+	{
+		list =NULL;
+		return list;
+	}
+	if(p->data==data && p->rlink !=NULL)
+	{
+		if(p->llink==NULL)//2. 처음꺼삭제
+			{list=p->rlink; list->llink=NULL; free(p); return list;}
+		else //3. 중간값삭제
+		{
+			p->llink->rlink=p->rlink;
+			p->rlink->llink=p->llink;
+			free(p);
+			return list;
+		}
+	}
+	if(p->data==data&&p->rlink==NULL) //4. 끝노드
+	{
+		p->llink->rlink=NULL;
+		free(p);
+		return list;
+	}
+	if(p->data!=data && p->rlink==NULL)//5. 삭제값 없음
+	{
+		printf("\n삭제 값 없음 ");
+		return list;
+	}
+
+}
+void search(DNode *list, int data)
+{
+	DNode *p;
+	p=list;
+	if(p==NULL) {printf("\검색 불가\n"); }
+	while(p!=NULL && p->data!=data)
+		p=p->rlink;
+	if (p == NULL) 
+		printf("\n 리스트에는 %d가 없음 \n", data);
+	else printf("\n %d의 주소 : %p \n", data, p);
+}
+
+void print(DNode *list)
+{
+	DNode *p;
+	p=list;
+	if(p==NULL) {printf("\출력 불가\n"); }
+	printf("\n");
+	while(p!=NULL)
+	{printf("%d ->",p->data); p=p->rlink;}
+	printf("\n");
+}
+
+void print_ch(DNode *list)
+{
+	DNode *p;
+	p=list;
+	if(p==NULL) {printf("\출력 불가\n"); }
+	printf("\n");
+	while(p!=NULL)
+	{printf("%c ->",p->data); p=p->rlink;}
+	printf("\n");
+}
+void main()
+{
+	int data,result, menu, cnt_U=0,cnt_L=0,cnt_D=0,cnt_S=0,total=0;
+	char ch;
+	DNode *list, *p, *upper, *lower, *digit, *special; 
+	list = upper = lower = digit = special = NULL;
+
+
+	while(1)
+	{
+		printf("메뉴 선택 1)삽입 2)삭제 3)검색 4)출력 5)문자열 저장 6)종료 :");
+		scanf("%d",&menu);
+		if(menu==6)
+			break;
+		switch(menu)
+		{
+		case 1: //삽입
+			printf("삽입 할 정수 입력 : ");
+			scanf("%d",&data);
+			list=insert(list,data);
+			break;
+		case 2: //삭제
+			printf("삭제 할 정수 입력 : ");
+			scanf("%d",&data);
+			list=del(list,data);
+			break; 
+		case 3: //검색
+			printf("검색 할 정수 입력 : ");
+			scanf("%d", &data);
+			search(list,data);
+			break;
+		case 4: //출력
+			print(list);
+			break;
+		case 5: //문자열 저장
+			result=getchar();//버퍼에 남은 문자 하나 제거
+			while(1)
+			{
+				result=getchar();
+				putchar(result);
+				if(result=='\n')
+					break;
+				total++;
+				if(result>='A' &&result <='Z')
+				{cnt_U++; upper=insert(upper,result);}
+				else if(result>='a'&&result<='z')
+				{cnt_L++; lower=insert(lower,result);}
+				else if(result>='0'&&result<='9')
+				{cnt_D++; digit=insert(digit,result);}
+				else
+				{cnt_S++; special=insert(special,result);}
+			}
+			printf("\n대문자 리스트");
+			print_ch(upper); printf(" : 총 %d개 ",cnt_U);
+			printf("\n소문자 리스트");
+			print_ch(lower); printf(" : 총 %d개 ",cnt_L);
+			printf("\n숫자 리스트");
+			print_ch(digit); printf(" : 총 %d개 ",cnt_D);
+			printf("\n특수문자 리스트");
+			print_ch(special); printf(" : 총 %d개 ",cnt_S);
+			printf("\n총 개수 :");
+			printf(" : %d개",total);
+			break;
+		default:
+			printf("\n메뉴 선택 오류 ");
+			break;
+		}
+	}
+}

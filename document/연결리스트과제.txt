@@ -1,0 +1,232 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+typedef struct poly
+{   float coef; int exp; struct poly *link;  }poly;
+
+
+void add(poly *A, poly *B, poly *C)   
+{
+
+   poly *n, *p;
+   n=p=NULL;
+   while(1)
+   {
+	  if(A==NULL&&B==NULL)
+		  break;
+      if(A==NULL||B==NULL )
+      {
+         if(A==NULL)
+         {
+			 n=(poly*)malloc(sizeof(poly));
+             n->coef=B->coef;
+             n->exp=B->exp;
+             B=B->link;
+             p->link=n;
+             p=p->link;
+         }
+         else if(B==NULL)
+         {
+             n=(poly*)malloc(sizeof(poly));
+             n->coef=A->coef;
+             n->exp=A->exp;
+             A=A->link;
+             p->link=n;
+             p=p->link;
+			 
+         }
+      }
+      else
+	  {
+      if(A->exp>B->exp)   
+      {
+         n=(poly*)malloc(sizeof(poly));
+         n->coef=A->coef;
+         n->exp=A->exp;
+         A=A->link;
+         if(C==NULL) C=p=n;
+         else{
+            p->link=n;
+            p=p->link;}
+   
+      }
+	  else if(A->exp==B->exp)
+	  {
+      n=(poly*)malloc(sizeof(poly));
+      n->coef=A->coef+B->coef;
+      n->exp=A->exp;
+      A=A->link; B=B->link;
+      if(C==NULL) C=p=n;
+      else{ 
+         p->link=n;
+         p=p->link;}
+      
+      }
+   else 
+   {
+      n=(poly*)malloc(sizeof(poly));
+      n->coef=B->coef;
+      n->exp=B->exp;
+      B=B->link;
+      if(C==NULL) C=p=n;
+      else{ 
+         p->link=n;
+         p=p->link;}
+   }
+      }
+
+   }
+
+
+   p ->link=NULL;
+   p = C;
+   printf("\n 다항식 A,B 덧셈 결과 = ");
+
+   
+   while(p != NULL)
+   {
+      printf("%4.1fX^%d + ",p->coef,p->exp);            
+      p=p->link;
+   }
+}
+   
+void sub(poly *A, poly *B, poly *D)
+{
+   poly *n, *p;
+   n=p=NULL;
+
+   while(1)
+   {
+	  if(A==NULL&&B==NULL)
+		 break;
+      if(A==NULL || B==NULL)
+      {
+         if(A==NULL)
+         {
+         n=(poly*)malloc(sizeof(poly));
+         n->coef=-B->coef;
+          n->exp=B->exp;
+          B=B->link;
+          p->link=n;
+          p=p->link;
+         }
+         else if(B==NULL)
+         {
+         n=(poly*)malloc(sizeof(poly));
+          n->coef=A->coef;
+          n->exp=A->exp;
+          A=A->link;
+          p->link=n;
+         p=p->link;
+         }
+      }
+      else
+      {
+      if(A->exp>B->exp)   
+      {
+         n=(poly*)malloc(sizeof(poly));
+         n->coef=A->coef;
+         n->exp=A->exp;
+         A=A->link;
+         if(D==NULL) D=p=n;
+         else{
+            p->link=n;
+            p=p->link;}
+      }
+      else if(A->exp==B->exp)
+      {
+         n=(poly*)malloc(sizeof(poly));
+         n->exp=A->exp;
+   
+          if(A->coef==B->coef)
+         {
+            A=A->link;
+            B=B->link;
+         }
+         else
+         {
+            n->coef=A->coef-B->coef;
+            A=A->link; B=B->link;
+            if(D==NULL) D=p=n;
+             else{
+                p->link=n;
+                p=p->link;}
+         }
+      }
+      else
+      {
+         n=(poly*)malloc(sizeof(poly));
+         n->coef=-(B->coef);
+         n->exp=B->exp;
+         B=B->link;
+         if(D==NULL) D=p=n;
+         else{ 
+            p->link=n;
+            p=p->link;}
+      }
+      }
+   }
+   p->link=NULL;
+   p = D;
+   printf("\n 다항식 A,B 뺄셈 결과 = ");
+   
+   while(p != NULL)
+   {
+      printf("(%4.1fX^%d) + ",p->coef,p->exp);            
+      p=p->link;
+   }
+
+}
+void main()
+{
+   poly *A, *B, *C, *D,*p, *n; 
+   A = B = C = D = p = n = NULL; //초기화
+   
+   printf("다항식 A 입력(계수, 차수) : ");
+   while (1)
+   {
+      n = (poly *)malloc(sizeof(poly));
+      scanf("%f%d", &n->coef, &n->exp);
+      if (n->coef == 0) break;      
+      if (A == NULL) A = p = n;
+      p->link = n;
+      p = p->link;      
+   }
+   p->link = NULL;// 마지막 구조체에 널 값 지정
+
+   printf("다항식 B 입력(계수, 차수) : ");
+   while (1)
+   {
+      n = (poly *)malloc(sizeof(poly));
+      scanf("%f%d", &n->coef, &n->exp);
+      if (n->coef == 0) break;      
+      if (B == NULL) B = p = n;
+      p->link = n;
+      p = p->link;      
+   }
+   p->link = NULL;// 마지막 구조체에 널 값 지정
+
+   //다항식 A 출력
+   p = A;
+   printf("\n 다항식 A = ");
+   while (p != NULL)
+   {
+      printf(" %4.1fX^%d ==>", p->coef, p->exp);
+      p = p->link;
+   }
+
+
+   //다항식 B 출력
+   p = B;
+   printf("\n 다항식 B = ");
+   while (p != NULL)
+   {
+      printf(" %4.1fX^%d ==>", p->coef, p->exp);
+      p = p->link;
+   }
+   add(A, B, C);
+   sub(A, B, D);
+
+   printf("\n");
+
+}

@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+void main(void)
+{
+	int a[10]={1,5,10,24,25,37,58,68,77};
+    int i, dat, in=8;
+
+for (i=0; i<10;i++)
+	printf("%3d", a[i]);
+
+printf("\n Insert Date : ");
+scanf("%d", &dat);
+
+i=0;
+
+while(a[i]< dat)
+	i++;
+
+while(i<= in)
+{
+	a[in+1] = a[in];
+	in--;
+}
+a[i] = dat;
+
+for (i=0; i<10;i++)
+	printf("%3d", a[i]);
+}

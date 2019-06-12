@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct HeapTree{
+int heap[200]; //0번 첨자는 미사용, 최대 199개 노드저장
+int heap_size;
+}HeapTree;
+
+
+void insert_min(HeapTree *H, int data)//최소히프일때 삽입함수
+{
+	int i=H->heap_size++ +1; //자기위치
+
+	while(i!=1 && data<H->heap[i/2]) //위에가 작은 숫자부터 -> 큰숫자로
+	{
+	H->heap[i]=H->heap[i/2];//부모 데이터 옮기기
+	i=i/2; //자식데이터 첨자도 부모데이터로 바꿔주기
+	}
+	H->heap[i]=data;
+}
+
+int delete_min_heap(HeapTree *H) //최소히프일때 삭제
+{
+	int temp=H->heap[H->heap_size--],item=H->heap[1];
+	int child, parent;
+	child=2; parent=1;
+
+	H->heap[1]=temp; //마지막 노드 값 저장
+	while(child<=H->heap_size)
+	{
+		if(H->heap_size>child && H->heap[child]> H->heap[child+1]) //최소라서 오른쪽이 작으면 child++ 해주기
+			child++;
+		if(H->heap[child]> temp) 
+			break;
+		H->heap[parent]=H->heap[child];
+		parent=child;
+		child=child*2;
+	}
+	H->heap[parent]=temp;
+	return item;
+}
+
+
+void main()
+{
+	HeapTree *H=(HeapTree *) malloc(sizeof(HeapTree));
+	H->heap_size =0; //초기화
+	insert_min(H,7);
+	insert_min(H,2);
+	insert_min(H,5);
+	insert_min(H,9);
+	insert_min(H,3);
+	insert_min(H,10);
+	printf("\n\n <힙트리에 저장된 정수 리스트> \n");
+	for(int i=H->heap_size; i>=1; i--)
+		printf(" %d ->",delete_min_heap(H));
+	
+
+}
+
